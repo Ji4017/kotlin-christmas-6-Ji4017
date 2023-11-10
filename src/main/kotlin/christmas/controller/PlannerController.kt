@@ -1,6 +1,7 @@
 package christmas.controller
 
 import christmas.validator.DateValidator
+import christmas.validator.InputService
 import christmas.view.InputView
 
 class PlannerController {
@@ -9,7 +10,7 @@ class PlannerController {
     }
 
     private fun readVisitDay(): Int {
-        val visitDay = InputView.inputWithRetry(
+        val visitDay = InputService.inputWithRetry(
             prompt = { InputView.readVisitDay() },
             validator = { DateValidator(it) }
         )
