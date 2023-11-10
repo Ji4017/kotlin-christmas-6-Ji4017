@@ -1,5 +1,7 @@
 package christmas
 
+import christmas.controller.PlannerController
+
 fun main() {
-    TODO("프로그램 구현")
+    PlannerController().run()
 }
