@@ -3,6 +3,7 @@ package christmas.validator
 import christmas.validator.OrderValidator.Companion.INVALID_ORDER_ERROR
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -43,5 +44,11 @@ class OrderValidatorTest {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
             OrderValidator("시저샐러드-10, 초코케이크-11 ")
         }.withMessage(INVALID_ORDER_ERROR)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["해산물파스타-2", "시저샐러드-3,초코케이크-5,레드와인-3"])
+    fun `올바른 값 입력`(value: String) {
+        assertDoesNotThrow { OrderValidator(value) }
     }
 }

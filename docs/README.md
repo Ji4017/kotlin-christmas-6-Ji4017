@@ -48,7 +48,7 @@
 ## 단위 테스트 목록
 
 - [x] DateValidator
-- [] OrderValidator
+- [x] OrderValidator
 
 
 <hr>
