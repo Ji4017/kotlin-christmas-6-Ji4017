@@ -10,7 +10,7 @@ class OrderValidator(private val order: String) {
         parseOrder()
         checkExistence()
         checkDuplication()
-//        checkMenuCount()
+        checkCountIsDigit()
 //        checkMenusCountRange()
     }
 
@@ -37,8 +37,8 @@ class OrderValidator(private val order: String) {
         require(uniqueMenuNames.size == menuNames.size) { INVALID_ORDER_ERROR }
     }
 
-    private fun checkMenuCount() {
-
+    private fun checkCountIsDigit() {
+        require(menuCounts.all { it.toIntOrNull() != null && it.toInt() >= MINIMUM_ORDER_COUNT }) { INVALID_ORDER_ERROR }
     }
 
     private fun checkMenusCountRange() {
@@ -47,5 +47,6 @@ class OrderValidator(private val order: String) {
 
     companion object {
         const val INVALID_ORDER_ERROR = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
+        const val MINIMUM_ORDER_COUNT = 1
     }
 }

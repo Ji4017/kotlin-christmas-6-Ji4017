@@ -28,4 +28,13 @@ class OrderValidatorTest {
             OrderValidator("시저샐러드-1,시저샐러드-1")
         }.withMessage(INVALID_ORDER_ERROR)
     }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = ["시저샐러드-하나", "시저샐러드-0"])
+    fun `메뉴의 개수가 1이상의 숫자가 아닐 때`(value: String) {
+        Assertions.assertThatIllegalArgumentException().isThrownBy {
+            OrderValidator(value)
+        }.withMessage(INVALID_ORDER_ERROR)
+    }
 }
