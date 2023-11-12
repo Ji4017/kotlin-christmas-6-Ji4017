@@ -3,27 +3,32 @@ package christmas.validator
 import christmas.domain.Menu
 
 class OrderValidator(private val order: String) {
-    private val parsedOrder: MutableMap<String, String> = mutableMapOf()
+    private val menuNames: MutableList<String> = mutableListOf()
+    private val menuCounts: MutableList<String> = mutableListOf()
 
     init {
-        checkForm()
+        parseOrder()
         checkExistence()
 //        checkDuplication()
 //        checkMenuCount()
 //        checkMenusCountRange()
     }
 
-    private fun checkForm() {
+    private fun parseOrder() {
         order.split(",").forEach {
             val parts = it.split("-")
             require(parts.size == 2) { INVALID_ORDER_ERROR }
-            parsedOrder[parts[0]] = parts[1]
+            val menuName = parts[0]
+            val menuCount = parts[1]
+
+            menuNames.add(menuName)
+            menuCounts.add(menuCount)
         }
     }
 
     private fun checkExistence() {
-        parsedOrder.keys.forEach { key ->
-            requireNotNull(Menu.findByName(key)) { INVALID_ORDER_ERROR }
+        menuNames.forEach { menuName ->
+            requireNotNull(Menu.findByName(menuName)) { INVALID_ORDER_ERROR }
         }
     }
 
