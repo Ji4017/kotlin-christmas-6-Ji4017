@@ -2,8 +2,8 @@ package christmas.domain
 
 class Order(private val order: Map<String, Int>) {
 
-    fun details() {
-
+    fun getOrder(): Map<String, Int> {
+        return order
     }
 
     fun totalPrice() {
