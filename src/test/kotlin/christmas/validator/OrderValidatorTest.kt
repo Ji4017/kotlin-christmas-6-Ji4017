@@ -21,4 +21,11 @@ class OrderValidatorTest {
             OrderValidator("무지개돈까스-1")
         }.withMessage(INVALID_ORDER_ERROR)
     }
+
+    @Test
+    fun `메뉴 중복`() {
+        Assertions.assertThatIllegalArgumentException().isThrownBy {
+            OrderValidator("시저샐러드-1,시저샐러드-1")
+        }.withMessage(INVALID_ORDER_ERROR)
+    }
 }

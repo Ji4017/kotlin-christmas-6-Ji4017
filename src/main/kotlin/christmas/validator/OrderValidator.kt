@@ -9,7 +9,7 @@ class OrderValidator(private val order: String) {
     init {
         parseOrder()
         checkExistence()
-//        checkDuplication()
+        checkDuplication()
 //        checkMenuCount()
 //        checkMenusCountRange()
     }
@@ -33,7 +33,8 @@ class OrderValidator(private val order: String) {
     }
 
     private fun checkDuplication() {
-
+        val uniqueMenuNames = menuNames.toSet()
+        require(uniqueMenuNames.size == menuNames.size) { INVALID_ORDER_ERROR }
     }
 
     private fun checkMenuCount() {
