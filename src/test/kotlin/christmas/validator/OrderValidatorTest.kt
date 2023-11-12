@@ -37,4 +37,11 @@ class OrderValidatorTest {
             OrderValidator(value)
         }.withMessage(INVALID_ORDER_ERROR)
     }
+
+    @Test
+    fun `최대 주문 개수 초과`() {
+        Assertions.assertThatIllegalArgumentException().isThrownBy {
+            OrderValidator("시저샐러드-10, 초코케이크-11 ")
+        }.withMessage(INVALID_ORDER_ERROR)
+    }
 }

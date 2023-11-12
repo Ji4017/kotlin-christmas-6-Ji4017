@@ -11,7 +11,7 @@ class OrderValidator(private val order: String) {
         checkExistence()
         checkDuplication()
         checkCountIsDigit()
-//        checkMenusCountRange()
+        checkMaximumCount()
     }
 
     private fun parseOrder() {
@@ -41,12 +41,15 @@ class OrderValidator(private val order: String) {
         require(menuCounts.all { it.toIntOrNull() != null && it.toInt() >= MINIMUM_ORDER_COUNT }) { INVALID_ORDER_ERROR }
     }
 
-    private fun checkMenusCountRange() {
-
+    private fun checkMaximumCount() {
+        val totalOrderCount = menuCounts.sumOf { it.toInt() }
+        require(totalOrderCount <= MAXIMUM_ORDER_COUNT) { INVALID_ORDER_ERROR }
     }
 
     companion object {
-        const val INVALID_ORDER_ERROR = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
         const val MINIMUM_ORDER_COUNT = 1
+        const val MAXIMUM_ORDER_COUNT = 20
+
+        const val INVALID_ORDER_ERROR = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
     }
 }
