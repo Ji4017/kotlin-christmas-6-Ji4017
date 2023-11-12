@@ -1,6 +1,8 @@
 package christmas.validator
 
+import christmas.validator.OrderValidator.Companion.INVALID_ORDER_ERROR
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -10,6 +12,13 @@ class OrderValidatorTest {
     fun `메뉴 형식 검증`(value: String) {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
             OrderValidator(value)
-        }.withMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.")
+        }.withMessage(INVALID_ORDER_ERROR)
+    }
+
+    @Test
+    fun `없는 메뉴 입력`() {
+        Assertions.assertThatIllegalArgumentException().isThrownBy {
+            OrderValidator("무지개돈까스-1")
+        }.withMessage(INVALID_ORDER_ERROR)
     }
 }
