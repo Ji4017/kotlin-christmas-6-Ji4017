@@ -18,6 +18,7 @@ class OrderValidator(private val order: String) {
         order.split(",").forEach {
             val parts = it.split("-")
             require(parts.size == 2) { INVALID_ORDER_ERROR }
+
             val menuName = parts[0]
             val menuCount = parts[1]
 

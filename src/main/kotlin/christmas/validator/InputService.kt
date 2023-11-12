@@ -1,11 +1,11 @@
 package christmas.validator
 
-import christmas.constant.Constants
+import christmas.constant.Constants.MAX_ATTEMPTS
 
 class InputService {
     companion object {
         fun <T> inputWithRetry(prompt: () -> T, validator: (value: T) -> Unit): T {
-            repeat(Constants.MAX_ATTEMPTS) {
+            repeat(MAX_ATTEMPTS) {
                 try {
                     val value = prompt()
                     validator(value)

@@ -13,8 +13,9 @@ class InputView {
             return Console.readLine().replace(" ", "")
         }
 
-        fun readMenu() {
+        fun readOrder(): String {
             println(MENU_PROMPT)
+            return Console.readLine().replace(" ", "")
         }
     }
 }
