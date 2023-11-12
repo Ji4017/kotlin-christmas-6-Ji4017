@@ -15,6 +15,7 @@ class PlannerController {
         readVisitDay()
         readOrder()
         printOrderDetails()
+        printTotalPrice()
     }
 
     private fun readVisitDay() {
@@ -36,5 +37,9 @@ class PlannerController {
     private fun printOrderDetails() {
         OutputView.benefitPreview()
         OutputView.orderDetails(order.getOrder())
+    }
+
+    private fun printTotalPrice() {
+        OutputView.totalPrice(order.totalPrice())
     }
 }
