@@ -1,6 +1,8 @@
 package christmas.validator
 
 import christmas.validator.OrderValidator.Companion.INVALID_ORDER_ERROR
+import christmas.validator.OrderValidator.Companion.MAXIMUM_COUNT_ERROR
+import christmas.validator.OrderValidator.Companion.ONLY_DRINK_ERROR
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -30,6 +32,12 @@ class OrderValidatorTest {
         }.withMessage(INVALID_ORDER_ERROR)
     }
 
+    @Test
+    fun `음료만 주문`() {
+        Assertions.assertThatIllegalArgumentException().isThrownBy {
+            OrderValidator("레드와인-2")
+        }.withMessage(ONLY_DRINK_ERROR)
+    }
 
     @ParameterizedTest
     @ValueSource(strings = ["시저샐러드-하나", "시저샐러드-0"])
@@ -42,8 +50,8 @@ class OrderValidatorTest {
     @Test
     fun `최대 주문 개수 초과`() {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
-            OrderValidator("시저샐러드-10, 초코케이크-11 ")
-        }.withMessage(INVALID_ORDER_ERROR)
+            OrderValidator("시저샐러드-10,초코케이크-11")
+        }.withMessage(MAXIMUM_COUNT_ERROR)
     }
 
     @ParameterizedTest
