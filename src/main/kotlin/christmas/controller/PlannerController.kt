@@ -1,5 +1,6 @@
 package christmas.controller
 
+import christmas.domain.Event
 import christmas.domain.Order
 import christmas.validator.DateValidator
 import christmas.validator.InputService
@@ -8,14 +9,20 @@ import christmas.view.InputView
 import christmas.view.OutputView
 
 class PlannerController {
-    private var visitDay: Int? = null
+    private var visitDay: Int = 0
     private lateinit var order: Order
+    private lateinit var event: Event
+    private var totalPrice: Int = 0
 
     fun run() {
         readVisitDay()
-        readOrder()
+        val parsedOrder = readOrder()
+        order = Order(parsedOrder)
+        event = Event(parsedOrder, visitDay)
         printOrderDetails()
         printTotalPrice()
+        printGift()
+
     }
 
     private fun readVisitDay() {
@@ -25,13 +32,13 @@ class PlannerController {
         ).toInt()
     }
 
-    private fun readOrder() {
+    private fun readOrder(): Map<String, Int> {
         val input = InputService.inputWithRetry(
             prompt = { InputView.readOrder() },
             validator = { OrderValidator(it) }
         )
-        val parsedOrder =  InputService.parseOrder(input)
-        order = Order(parsedOrder)
+        return  InputService.parseOrder(input)
+//        order = Order(parsedOrder)
     }
 
     private fun printOrderDetails() {
@@ -40,6 +47,11 @@ class PlannerController {
     }
 
     private fun printTotalPrice() {
-        OutputView.totalPrice(order.totalPrice())
+        totalPrice = order.totalPrice()
+        OutputView.totalPrice(totalPrice)
+    }
+
+    private fun printGift() {
+        OutputView.gift(event.gift(totalPrice))
     }
 }

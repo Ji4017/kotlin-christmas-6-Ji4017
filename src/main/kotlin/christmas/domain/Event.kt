@@ -1,6 +1,6 @@
 package christmas.domain
 
-class Event(private val menus: Map<String, Int>, private val date: Int) {
+class Event(private val order: Map<String, Int>, private val visitDay: Int) {
 
     init {
         christmas()
@@ -25,8 +25,11 @@ class Event(private val menus: Map<String, Int>, private val date: Int) {
 
     }
 
-    fun gift() {
-
+    fun gift(totalPrice: Int): String {
+        if (totalPrice >= GIFT_EVENT_AMOUNT) {
+            return "샴페인 1개"
+        }
+        return "없음"
     }
 
     fun profitDetail() {
@@ -39,5 +42,9 @@ class Event(private val menus: Map<String, Int>, private val date: Int) {
 
     fun badge() {
 
+    }
+
+    companion object {
+        const val GIFT_EVENT_AMOUNT = 120000
     }
 }
