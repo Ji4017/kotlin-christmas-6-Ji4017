@@ -11,7 +11,10 @@ class EventTest {
         val orderInformation = Order(visitDay, mapOf("양송이수프" to 2, "타파스" to 1))
         val benefit = Event(orderInformation)
         val discounts = benefit.getDiscounts()
-        assertEquals(Event.BASE_DISCOUNT + ((visitDay-1) * Event.PER_DAY_DISCOUNT), discounts[Event.TITLE_CHRISTMAS_DISCOUNT])
+        assertEquals(
+            Event.BASE_DISCOUNT + ((visitDay - 1) * Event.PER_DAY_DISCOUNT),
+            discounts[Event.TITLE_CHRISTMAS_DISCOUNT]
+        )
     }
 
     @Test

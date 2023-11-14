@@ -2,6 +2,7 @@ package christmas.domain
 
 class Order(private val visitDay: Int, private val orderMenus: Map<String, Int>) {
     private var totalPrice = 0
+
     init {
         calculateTotalPrice()
     }

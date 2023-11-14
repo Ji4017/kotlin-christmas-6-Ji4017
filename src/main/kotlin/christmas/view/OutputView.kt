@@ -36,7 +36,7 @@ object OutputView {
 
     fun printDiscountDetails(discounts: Map<String, Int>) {
         println(MESSAGE_BENEFIT_DETAILS)
-        if(discounts.isEmpty()) {
+        if (discounts.isEmpty()) {
             println("없음").also { println() }
             return
         }
