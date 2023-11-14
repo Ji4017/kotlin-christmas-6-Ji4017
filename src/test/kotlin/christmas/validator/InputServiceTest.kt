@@ -1,5 +1,6 @@
 package christmas.validator
 
+import christmas.service.InputService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

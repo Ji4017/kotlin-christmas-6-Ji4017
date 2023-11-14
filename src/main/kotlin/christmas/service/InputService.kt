@@ -1,4 +1,4 @@
-package christmas.validator
+package christmas.service
 
 class InputService {
     companion object {
