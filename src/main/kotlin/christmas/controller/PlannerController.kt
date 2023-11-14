@@ -9,27 +9,26 @@ import christmas.view.InputView
 import christmas.view.OutputView
 
 class PlannerController {
-    private var visitDay: Int = 0
-    private lateinit var order: Order
-    private lateinit var event: Event
-    private var totalPrice: Int = 0
 
     fun run() {
-        readVisitDay()
-        val parsedOrder = readOrder()
-        order = Order(parsedOrder)
-        event = Event(parsedOrder, visitDay)
-        printOrderDetails()
-        printTotalPrice()
-        printGift()
+        val visitDay = readVisitDay()
+        val orderMenus = readOrder()
 
+        val orderInformation = Order(orderMenus, visitDay)
+        val benefit = Event(orderInformation)
+
+        printOrderMenus(orderMenus)
+        printTotalPrice(orderInformation.getTotalPrice())
+        printGift(benefit.getGift())
+        printDiscountDetails(benefit.getDiscounts())
     }
 
-    private fun readVisitDay() {
-        visitDay = InputService.inputWithRetry(
+    private fun readVisitDay(): Int {
+        val input = InputService.inputWithRetry(
             prompt = { InputView.readVisitDay() },
             validator = { DateValidator(it) }
         ).toInt()
+        return input
     }
 
     private fun readOrder(): Map<String, Int> {
@@ -38,20 +37,24 @@ class PlannerController {
             validator = { OrderValidator(it) }
         )
         return  InputService.parseOrder(input)
-//        order = Order(parsedOrder)
     }
 
-    private fun printOrderDetails() {
-        OutputView.benefitPreview()
-        OutputView.orderDetails(order.getOrder())
+    private fun printOrderMenus(orderMenus: Map<String, Int>) {
+        OutputView.printBenefitPreview()
+        OutputView.printOrderMenus(orderMenus)
     }
 
-    private fun printTotalPrice() {
-        totalPrice = order.totalPrice()
-        OutputView.totalPrice(totalPrice)
+    private fun printTotalPrice(totalPrice: Int) {
+        OutputView.printTotalPrice(totalPrice)
     }
 
-    private fun printGift() {
-        OutputView.gift(event.gift(totalPrice))
+    private fun printGift(gift: String) {
+        OutputView.printGiftMenu(gift)
+    }
+
+    private fun printDiscountDetails(discounts: Map<String, Int>) {
+        val filteredDiscounts = discounts.filterValues { discountPrice ->
+            discountPrice != 0 }
+        OutputView.printDiscountDetails(filteredDiscounts)
     }
 }

@@ -6,13 +6,13 @@ object OutputView {
     private const val MESSAGE_ORDER_MENU = "<주문 메뉴>"
     private const val MESSAGE_TOTAL_PRICE = "<할인 전 총주문 금액>"
     private const val MESSAGE_GIFT = "<증정 메뉴>"
+    private const val MESSAGE_BENEFIT_DETAILS = "<혜택 내역>"
 
-    fun benefitPreview() {
-        println(MESSAGE_EVENT_BENEFIT_PREVIEW)
-        println()
+    fun printBenefitPreview() {
+        println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
     }
 
-    fun orderDetails(order: Map<String, Int>) {
+    fun printOrderMenus(order: Map<String, Int>) {
         println(MESSAGE_ORDER_MENU)
         for ((menu, count) in order) {
             println("$menu $count$MESSAGE_COUNT_SUFFIX")
@@ -20,31 +20,34 @@ object OutputView {
         println()
     }
 
-    fun totalPrice(totalPrice: Int) {
+    fun printTotalPrice(totalPrice: Int) {
         println(MESSAGE_TOTAL_PRICE)
         val formattedNum = String.format("%,d", totalPrice)
-        println(formattedNum)
+        println(formattedNum).also { println() }
+    }
+
+    fun printGiftMenu(gift: String) {
+        println(MESSAGE_GIFT)
+        println(gift).also { println() }
+    }
+
+    fun printDiscountDetails(discounts: Map<String, Int>) {
+        println(MESSAGE_BENEFIT_DETAILS)
+        for ((titleDiscount, discountPrice) in discounts) {
+            println("$titleDiscount: ${String.format("%,d", discountPrice)}원")
+        }
         println()
     }
 
-    fun gift(gift: String) {
-        println(MESSAGE_GIFT)
-        println(gift)
-    }
-
-    fun discountDetails() {
+    fun printTotalDiscount() {
 
     }
 
-    fun totalDiscount() {
+    fun printAmountOfPayment() {
 
     }
 
-    fun amountOfPayment() {
-
-    }
-
-    fun badge() {
+    fun printBadge() {
 
     }
 }
