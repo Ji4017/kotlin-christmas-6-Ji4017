@@ -27,7 +27,10 @@ class Event(private val orderInformation: Order) {
         if (visitDay in CHRISTMAS_DISCOUNT_START..CHRISTMAS_DISCOUNT_END) {
             christmasDiscount += BASE_DISCOUNT + (visitDay - 1) * PER_DAY_DISCOUNT
         }
-        discounts[TITLE_CHRISTMAS_DISCOUNT] = -christmasDiscount
+
+        if (christmasDiscount != 0) {
+            discounts[TITLE_CHRISTMAS_DISCOUNT] = christmasDiscount
+        }
     }
 
     private fun applyWeekDayDiscount() {
@@ -39,7 +42,10 @@ class Event(private val orderInformation: Order) {
                 weekDayDiscount += WEEKDAY_DISCOUNT * count
             }
         }
-        discounts[TITLE_WEEKDAY_DISCOUNT] = -weekDayDiscount
+
+        if(weekDayDiscount != 0) {
+            discounts[TITLE_WEEKDAY_DISCOUNT] = weekDayDiscount
+        }
     }
 
     private fun applyWeekendDiscount() {
@@ -51,18 +57,21 @@ class Event(private val orderInformation: Order) {
                 weekendDiscount += WEEKEND_DISCOUNT * count
             }
         }
-        discounts[TITLE_WEEKEND_DISCOUNT] = -weekendDiscount
+
+        if (weekendDiscount !=0) {
+            discounts[TITLE_WEEKEND_DISCOUNT] = weekendDiscount
+        }
     }
 
     private fun applySpecialDiscount() {
         if (visitDate.dayOfMonth in STAR_DAYS) {
-            discounts[TITLE_SPECIAL_DISCOUNT] = -SPECIAL_DISCOUNT
+            discounts[TITLE_SPECIAL_DISCOUNT] = SPECIAL_DISCOUNT
         }
     }
 
     private fun applyGiftDiscount() {
         if (totalPrice >= GIFT_APPLIED_PRICE) {
-            discounts[TITLE_GIFT_EVENT] = -GIFT_PRICE
+            discounts[TITLE_GIFT_EVENT] = GIFT_PRICE
             gift = GIFT_NAME
         }
     }
@@ -80,7 +89,7 @@ class Event(private val orderInformation: Order) {
     }
 
     fun getBadge(): String {
-        val totalDiscount = -(getTotalDiscount())
+        val totalDiscount = getTotalDiscount()
 
         return when {
             (totalDiscount >= BADGE_SANTA_PRICE) -> BADGE_SANTA

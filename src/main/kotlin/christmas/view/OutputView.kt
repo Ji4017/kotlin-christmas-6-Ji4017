@@ -11,7 +11,7 @@ object OutputView {
     private const val MESSAGE_FINAL_PRICE = "<할인 후 예상 결제 금액>"
     private const val MESSAGE_EVENT_BADGE = "<12월 이벤트 배지>"
 
-    fun printBenefitPreview() {
+    fun printBenefitPreviewMessage() {
         println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
     }
 
@@ -37,13 +37,13 @@ object OutputView {
     fun printDiscountDetails(discounts: Map<String, Int>) {
         println(MESSAGE_BENEFIT_DETAILS)
         for ((titleDiscount, discountPrice) in discounts) {
-            println("$titleDiscount: ${String.format("%,d", discountPrice)}원")
+            println("$titleDiscount: ${String.format("-%,d", discountPrice)}원")
         }
         println()
     }
 
     fun printTotalDiscount(totalDiscount: Int) {
-        val formattedNum = String.format("%,d", totalDiscount) + "원"
+        val formattedNum = String.format("-%,d", totalDiscount) + "원"
         println(MESSAGE_TOTAL_DISCOUNT)
         println(formattedNum).also { println() }
     }
