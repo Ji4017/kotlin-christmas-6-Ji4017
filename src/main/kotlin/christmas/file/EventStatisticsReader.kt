@@ -25,4 +25,19 @@ class EventStatisticsReader {
         }
         return 0
     }
+
+    fun readPreviousParticipants(): Int {
+        val participantPattern = Regex("참여 고객 수: ([0-9,]+)")
+
+        for (line in lines) {
+            if (line.contains(participantPattern)) {
+                val matchResult = participantPattern.find(line)
+                if (matchResult != null) {
+                    val participantString = matchResult.groupValues[1].replace(",", "")
+                    return Integer.parseInt(participantString)
+                }
+            }
+        }
+        return 0
+    }
 }

@@ -81,5 +81,6 @@ class PlannerController {
     private fun saveEventStatistics(salesAmount: Int) {
         val writer = EventStatisticsWriter()
         writer.writeSalesAmount(salesAmount)
+        writer.writeNumberOfParticipants()
     }
 }

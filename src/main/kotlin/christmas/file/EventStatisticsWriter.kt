@@ -21,4 +21,12 @@ class EventStatisticsWriter {
         val salesData = "2023년 12월 판매 금액: ${String.format("%,d", totalSales)}원\n"
         Files.write(filePath, salesData.toByteArray(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)
     }
+
+    fun writeNumberOfParticipants() {
+        val previousParticipants = fileReader.readPreviousParticipants()
+        val numberOfParticipants = 1
+        val totalParticipants = previousParticipants + numberOfParticipants
+        val participantData = "2023년 12월 이벤트 참여 고객 수: ${String.format("%,d", totalParticipants)}\n"
+        Files.write(filePath, participantData.toByteArray(), StandardOpenOption.CREATE, StandardOpenOption.APPEND)
+    }
 }
