@@ -36,6 +36,11 @@ object OutputView {
 
     fun printDiscountDetails(discounts: Map<String, Int>) {
         println(MESSAGE_BENEFIT_DETAILS)
+        if(discounts.isEmpty()) {
+            println("없음").also { println() }
+            return
+        }
+
         for ((titleDiscount, discountPrice) in discounts) {
             println("$titleDiscount: ${String.format("-%,d", discountPrice)}원")
         }
