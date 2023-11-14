@@ -21,6 +21,7 @@ class PlannerController {
         printTotalPrice(orderInformation.getTotalPrice())
         printGift(benefit.getGift())
         printDiscountDetails(benefit.getDiscounts())
+        printTotalDiscount(benefit.getTotalDiscount())
     }
 
     private fun readVisitDay(): Int {
@@ -56,5 +57,9 @@ class PlannerController {
         val filteredDiscounts = discounts.filterValues { discountPrice ->
             discountPrice != 0 }
         OutputView.printDiscountDetails(filteredDiscounts)
+    }
+
+    private fun printTotalDiscount(totalDiscount: Int) {
+        OutputView.printTotalDiscount(totalDiscount)
     }
 }

@@ -7,6 +7,7 @@ object OutputView {
     private const val MESSAGE_TOTAL_PRICE = "<할인 전 총주문 금액>"
     private const val MESSAGE_GIFT = "<증정 메뉴>"
     private const val MESSAGE_BENEFIT_DETAILS = "<혜택 내역>"
+    private const val MESSAGE_TOTAL_DISCOUNT = "<총혜택 금액>"
 
     fun printBenefitPreview() {
         println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
@@ -39,8 +40,9 @@ object OutputView {
         println()
     }
 
-    fun printTotalDiscount() {
-
+    fun printTotalDiscount(totalDiscount: Int) {
+        println(MESSAGE_TOTAL_DISCOUNT)
+        println(totalDiscount).also { println() }
     }
 
     fun printAmountOfPayment() {
