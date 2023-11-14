@@ -2,7 +2,6 @@ package christmas.validator
 
 import christmas.validator.OrderValidator.Companion.INVALID_ORDER_ERROR
 import christmas.validator.OrderValidator.Companion.MAXIMUM_COUNT_ERROR
-import christmas.validator.OrderValidator.Companion.ONLY_DRINK_ERROR
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -36,7 +35,7 @@ class OrderValidatorTest {
     fun `음료만 주문`() {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
             OrderValidator("레드와인-2")
-        }.withMessage(ONLY_DRINK_ERROR)
+        }.withMessage(INVALID_ORDER_ERROR)
     }
 
     @ParameterizedTest
