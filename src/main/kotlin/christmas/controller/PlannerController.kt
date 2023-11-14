@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.domain.Event
 import christmas.domain.Order
+import christmas.file.EventStatisticsWriter
 import christmas.validator.DateValidator
 import christmas.validator.InputService
 import christmas.validator.OrderValidator
@@ -22,8 +23,9 @@ class PlannerController {
         printGift(benefit.getGift())
         printDiscountDetails(benefit.getDiscounts())
         printTotalDiscount(benefit.getTotalDiscount())
-        printFinalPrice(orderInformation.getTotalPrice(), benefit.getTotalDiscount())
+        val finalPrice = printFinalPrice(orderInformation.getTotalPrice(), benefit.getTotalDiscount())
         printBadge(benefit.getBadge())
+        saveEventStatistics(finalPrice)
     }
 
     private fun readVisitDay(): Int {
@@ -66,12 +68,18 @@ class PlannerController {
         OutputView.printTotalDiscount(totalDiscount)
     }
 
-    private fun printFinalPrice(totalPrice: Int, totalDiscount: Int) {
+    private fun printFinalPrice(totalPrice: Int, totalDiscount: Int): Int {
         val finalPrice = totalPrice + totalDiscount
         OutputView.printFinalPrice(finalPrice)
+        return finalPrice
     }
 
     private fun printBadge(badge: String) {
         OutputView.printBadge(badge)
+    }
+
+    private fun saveEventStatistics(salesAmount: Int) {
+        val writer = EventStatisticsWriter()
+        writer.writeSalesAmount(salesAmount)
     }
 }
