@@ -22,6 +22,7 @@ class PlannerController {
         printGift(benefit.getGift())
         printDiscountDetails(benefit.getDiscounts())
         printTotalDiscount(benefit.getTotalDiscount())
+        printFinalPrice(orderInformation.getTotalPrice(), benefit.getTotalDiscount())
     }
 
     private fun readVisitDay(): Int {
@@ -37,7 +38,7 @@ class PlannerController {
             prompt = { InputView.readOrder() },
             validator = { OrderValidator(it) }
         )
-        return  InputService.parseOrder(input)
+        return InputService.parseOrder(input)
     }
 
     private fun printOrderMenus(orderMenus: Map<String, Int>) {
@@ -55,11 +56,17 @@ class PlannerController {
 
     private fun printDiscountDetails(discounts: Map<String, Int>) {
         val filteredDiscounts = discounts.filterValues { discountPrice ->
-            discountPrice != 0 }
+            discountPrice != 0
+        }
         OutputView.printDiscountDetails(filteredDiscounts)
     }
 
     private fun printTotalDiscount(totalDiscount: Int) {
         OutputView.printTotalDiscount(totalDiscount)
+    }
+
+    private fun printFinalPrice(totalPrice: Int, totalDiscount: Int) {
+        val finalPrice = totalPrice + totalDiscount
+        OutputView.printFinalPrice(finalPrice)
     }
 }

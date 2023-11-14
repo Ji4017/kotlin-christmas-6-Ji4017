@@ -8,6 +8,7 @@ object OutputView {
     private const val MESSAGE_GIFT = "<증정 메뉴>"
     private const val MESSAGE_BENEFIT_DETAILS = "<혜택 내역>"
     private const val MESSAGE_TOTAL_DISCOUNT = "<총혜택 금액>"
+    private const val MESSAGE_FINAL_PRICE = "<할인 후 예상 결제 금액>"
 
     fun printBenefitPreview() {
         println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
@@ -22,8 +23,8 @@ object OutputView {
     }
 
     fun printTotalPrice(totalPrice: Int) {
+        val formattedNum = String.format("%,d", totalPrice) + "원"
         println(MESSAGE_TOTAL_PRICE)
-        val formattedNum = String.format("%,d", totalPrice)
         println(formattedNum).also { println() }
     }
 
@@ -41,12 +42,15 @@ object OutputView {
     }
 
     fun printTotalDiscount(totalDiscount: Int) {
+        val formattedNum = String.format("%,d", totalDiscount) + "원"
         println(MESSAGE_TOTAL_DISCOUNT)
-        println(totalDiscount).also { println() }
+        println(formattedNum).also { println() }
     }
 
-    fun printAmountOfPayment() {
-
+    fun printFinalPrice(finalPrice: Int) {
+        val formattedNum = String.format("%,d", finalPrice) + "원"
+        println(MESSAGE_FINAL_PRICE)
+        println(formattedNum).also { println() }
     }
 
     fun printBadge() {
