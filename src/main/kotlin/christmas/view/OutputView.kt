@@ -9,6 +9,7 @@ object OutputView {
     private const val MESSAGE_BENEFIT_DETAILS = "<혜택 내역>"
     private const val MESSAGE_TOTAL_DISCOUNT = "<총혜택 금액>"
     private const val MESSAGE_FINAL_PRICE = "<할인 후 예상 결제 금액>"
+    private const val MESSAGE_EVENT_BADGE = "<12월 이벤트 배지>"
 
     fun printBenefitPreview() {
         println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
@@ -53,7 +54,8 @@ object OutputView {
         println(formattedNum).also { println() }
     }
 
-    fun printBadge() {
-
+    fun printBadge(badge: String) {
+        println(MESSAGE_EVENT_BADGE)
+        print(badge)
     }
 }

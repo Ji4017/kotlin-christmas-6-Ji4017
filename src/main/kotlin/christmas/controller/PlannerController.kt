@@ -23,6 +23,7 @@ class PlannerController {
         printDiscountDetails(benefit.getDiscounts())
         printTotalDiscount(benefit.getTotalDiscount())
         printFinalPrice(orderInformation.getTotalPrice(), benefit.getTotalDiscount())
+        printBadge(benefit.getBadge())
     }
 
     private fun readVisitDay(): Int {
@@ -68,5 +69,9 @@ class PlannerController {
     private fun printFinalPrice(totalPrice: Int, totalDiscount: Int) {
         val finalPrice = totalPrice + totalDiscount
         OutputView.printFinalPrice(finalPrice)
+    }
+
+    private fun printBadge(badge: String) {
+        OutputView.printBadge(badge)
     }
 }

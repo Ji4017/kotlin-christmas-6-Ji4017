@@ -80,12 +80,12 @@ class Event(private val orderInformation: Order) {
     }
 
     fun getBadge(): String {
-        val totalDiscount = getTotalDiscount()
+        val totalDiscount = -(getTotalDiscount())
 
         return when {
-            totalDiscount >= BADGE_SANTA_PRICE -> BADGE_SANTA
-            totalDiscount >= BADGE_TREE_PRICE -> BADGE_TREE
-            totalDiscount >= BADGE_STAR_PRICE -> BADGE_STAR
+            (totalDiscount >= BADGE_SANTA_PRICE) -> BADGE_SANTA
+            (totalDiscount >= BADGE_TREE_PRICE) -> BADGE_TREE
+            (totalDiscount >= BADGE_STAR_PRICE) -> BADGE_STAR
             else -> NOTHING
         }
     }
