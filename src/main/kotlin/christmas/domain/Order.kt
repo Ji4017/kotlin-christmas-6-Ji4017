@@ -1,17 +1,27 @@
 package christmas.domain
 
-class Order(private val order: Map<String, Int>) {
-
-    fun getOrder(): Map<String, Int> {
-        return order
+class Order(private val orderMenus: Map<String, Int>, private val visitDay: Int) {
+    private var totalPrice = 0
+    init {
+        calculateTotalPrice()
     }
 
-    fun totalPrice(): Int {
-        var total = 0
-        for ((menuName, count) in order) {
+    private fun calculateTotalPrice() {
+        for ((menuName, count) in orderMenus) {
             val menu = Menu.findByName(menuName)
-            total += menu!!.price * count
+            totalPrice += menu!!.price * count
         }
-        return total
+    }
+
+    fun getOrderMenus(): Map<String, Int> {
+        return orderMenus
+    }
+
+    fun getVisitDay(): Int {
+        return visitDay
+    }
+
+    fun getTotalPrice(): Int {
+        return totalPrice
     }
 }
