@@ -5,6 +5,9 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Event Statistics File
+docs/DecemberEventStatistics.txt
+
 ### STS ###
 .apt_generated
 .classpath
