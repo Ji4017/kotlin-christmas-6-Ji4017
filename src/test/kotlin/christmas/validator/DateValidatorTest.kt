@@ -17,7 +17,7 @@ class DateValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["0", "32"])
-    fun `날짜 범위를 벗어난 값 입력`(value: String) {
+    fun `날짜 범위 경곗값 테스트`(value: String) {
         assertThatIllegalArgumentException().isThrownBy {
             DateValidator(value)
         }.withMessage("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.")
