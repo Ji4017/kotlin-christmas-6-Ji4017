@@ -9,7 +9,7 @@ class Event(private val orderInformation: Order) {
     private val totalPrice = orderInformation.getTotalPrice()
     private val visitDate = LocalDate.of(EVENT_YEAR, EVENT_MONTH, visitDay)
     private val discounts = mutableMapOf<String, Int>()
-    private var gift = NOTHING
+    private var gift: String = NOTHING
 
     init {
         if (totalPrice > EVENT_APPLIED_PRICE) {
