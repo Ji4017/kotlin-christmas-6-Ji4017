@@ -17,7 +17,7 @@ class PlannerController {
         val orderInformation = Order(visitDay, orderMenus)
         val benefit = Event(orderInformation)
 
-        val finalPrice = ExcuteEventPlanner(orderInformation, benefit)
+        val finalPrice = executeEventPlanner(orderInformation, benefit)
 
         saveEventStatistics(finalPrice)
     }
@@ -35,7 +35,7 @@ class PlannerController {
         return Pair(visitDay, InputService.parseOrder(order))
     }
 
-    private fun ExcuteEventPlanner(orderInformation: Order, benefit: Event): Int {
+    private fun executeEventPlanner(orderInformation: Order, benefit: Event): Int {
         val totalPrice = orderInformation.getTotalPrice()
         val totalDiscount = benefit.getTotalDiscount()
         val finalPrice = totalPrice - totalDiscount
