@@ -1,7 +1,6 @@
 package christmas.view
 
 object OutputView {
-    private const val MESSAGE_EVENT_BENEFIT_PREVIEW = "12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"
     private const val MESSAGE_COUNT_SUFFIX = "개"
     private const val MESSAGE_ORDER_MENU = "<주문 메뉴>"
     private const val MESSAGE_TOTAL_PRICE = "<할인 전 총주문 금액>"
@@ -10,9 +9,10 @@ object OutputView {
     private const val MESSAGE_TOTAL_DISCOUNT = "<총혜택 금액>"
     private const val MESSAGE_FINAL_PRICE = "<할인 후 예상 결제 금액>"
     private const val MESSAGE_EVENT_BADGE = "<12월 이벤트 배지>"
+    private fun messageEventBenefitPreview(visitDay: Int) = "12월 ${visitDay}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"
 
-    fun printBenefitPreviewMessage() {
-        println(MESSAGE_EVENT_BENEFIT_PREVIEW).also { println() }
+    fun printBenefitPreviewMessage(visitDay: Int) {
+        println(messageEventBenefitPreview(visitDay)).also { println() }
     }
 
     fun printOrderMenus(order: Map<String, Int>) {

@@ -40,7 +40,7 @@ class PlannerController {
         val totalDiscount = benefit.getTotalDiscount()
         val finalPrice = totalPrice - totalDiscount
 
-        OutputView.printBenefitPreviewMessage()
+        OutputView.printBenefitPreviewMessage(orderInformation.getVisitDay())
         OutputView.printOrderMenus(orderInformation.getOrderMenus())
         OutputView.printTotalPrice(totalPrice)
         OutputView.printGiftMenu(benefit.getGift())
