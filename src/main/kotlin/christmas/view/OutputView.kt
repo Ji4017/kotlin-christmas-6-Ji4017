@@ -1,5 +1,7 @@
 package christmas.view
 
+import christmas.domain.Menu
+
 object OutputView {
     private const val MESSAGE_COUNT_SUFFIX = "개"
     private const val MESSAGE_ORDER_MENU = "<주문 메뉴>"
@@ -10,6 +12,24 @@ object OutputView {
     private const val MESSAGE_FINAL_PRICE = "<할인 후 예상 결제 금액>"
     private const val MESSAGE_EVENT_BADGE = "<12월 이벤트 배지>"
     private fun messageEventBenefitPreview(visitDay: Int) = "12월 ${visitDay}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"
+
+    fun printMenu() {
+        val types = mapOf(
+            "APPETIZER" to "애피타이저",
+            "MAIN" to "메인",
+            "DESSERT" to "디저트",
+            "DRINK" to "음료"
+        )
+
+        types.forEach { (typeKey, typeName) ->
+            val menuList = Menu.entries.filter { it.type == typeKey }
+            if (menuList.isNotEmpty()) {
+                println("<$typeName>")
+                println(menuList.joinToString(", ") { "${it.name}(${String.format("%,d", it.price)})" })
+                println()
+            }
+        }
+    }
 
     fun printBenefitPreviewMessage(visitDay: Int) {
         println(messageEventBenefitPreview(visitDay)).also { println() }

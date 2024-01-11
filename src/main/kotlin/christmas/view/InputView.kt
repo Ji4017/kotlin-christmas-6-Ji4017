@@ -10,10 +10,11 @@ object InputView {
 
     fun readVisitDay(): String {
         println(VISIT_DATE_PROMPT)
-        return Console.readLine().replace(" ", "").also { println(EVENT_AVAILABLE_PRICE_PROMPT) }
+        return Console.readLine().replace(" ", "").also { println() }
     }
 
     fun readOrder(): String {
+        println(EVENT_AVAILABLE_PRICE_PROMPT)
         println(MENU_PROMPT)
         return Console.readLine().replace(" ", "")
     }

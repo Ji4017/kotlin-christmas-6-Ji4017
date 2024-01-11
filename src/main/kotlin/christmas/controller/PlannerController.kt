@@ -28,6 +28,7 @@ class PlannerController {
             validator = { DateValidator(it) }
         ).toInt()
 
+        OutputView.printMenu()
         val order = InputService.inputWithRetry(
             prompt = { InputView.readOrder() },
             validator = { OrderValidator(it) }
