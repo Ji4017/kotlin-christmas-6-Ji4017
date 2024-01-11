@@ -12,28 +12,29 @@ import christmas.view.OutputView
 class PlannerController {
 
     fun run() {
-        val (visitDay, orderMenus) = readUserInput()
-
+        val visitDay = readVisitDay()
+        val orderMenus = readOrder()
         val orderInformation = Order(visitDay, orderMenus)
         val benefit = Event(orderInformation)
-
         val finalPrice = executeEventPlanner(orderInformation, benefit)
-
         saveEventStatistics(finalPrice)
     }
 
-    private fun readUserInput(): Pair<Int, Map<String, Int>> {
-        val visitDay = InputService.inputWithRetry(
+    private fun readVisitDay(): Int {
+        OutputView.printCalendar()
+        return InputService.inputWithRetry(
             prompt = { InputView.readVisitDay() },
             validator = { DateValidator(it) }
         ).toInt()
+    }
 
+    private fun readOrder(): Map<String, Int> {
         OutputView.printMenu()
         val order = InputService.inputWithRetry(
             prompt = { InputView.readOrder() },
             validator = { OrderValidator(it) }
         )
-        return Pair(visitDay, InputService.parseOrder(order))
+        return InputService.parseOrder(order)
     }
 
     private fun executeEventPlanner(orderInformation: Order, benefit: Event): Int {
