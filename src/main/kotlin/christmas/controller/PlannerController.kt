@@ -2,7 +2,7 @@ package christmas.controller
 
 import christmas.domain.Event
 import christmas.domain.Order
-import christmas.file.EventStatisticsWriter
+import christmas.statistics.EventStatisticsWriter
 import christmas.service.InputService
 import christmas.validator.DateValidator
 import christmas.validator.OrderValidator

@@ -1,4 +1,4 @@
-package christmas.file
+package christmas.statistics
 
 import java.nio.file.Files
 import java.nio.file.Paths
